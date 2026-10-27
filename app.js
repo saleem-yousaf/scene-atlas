@@ -6,7 +6,7 @@ const person=n=>`<a href="https://www.imdb.com/find/?q=${encodeURIComponent(n)}&
 const image=l=>photo(l.id)?`<img src="assets/${l.id}.jpg" alt="${esc(l.id==='matera'?'Matera city view':l.name)} ,  real location photograph" loading="lazy">`:`<span class="place-plaque" aria-label="${esc(l.name)}"><span>${esc(l.scope.toUpperCase())} REFERENCE</span><strong>${esc(l.city)}</strong><small>${l.lat.toFixed(2)}°, ${l.lon.toFixed(2)}°</small></span>`;
 let category='',query='',country='',mode='globe',selected='glenfinnan',filmFilter='',world=null,rotation=[-12,-24,0],zoom=1;
 const collections=[...new Set(FILMS.flatMap(f=>f.collections))].sort((a,b)=>a.localeCompare(b));
-const categories=['All locations','007','Marvel','Mission: Impossible','Christopher Nolan','Steven Spielberg','George Lucas'];
+const categories=['All locations','Musicals','War','Sports','Concert films','007','Marvel','Mission: Impossible','Christopher Nolan','Steven Spielberg','George Lucas'];
 function matchFilm(f){return (!category||f.collections.includes(category))&&(!filmFilter||f.id===filmFilter)&&(!query||[f.title,f.year,f.director,...f.cast,...f.collections].join(' ').toLowerCase().includes(query.toLowerCase()))}
 function matchLocation(l){return (!country||l.country===country)&&l.films.some(f=>(!category||f.collections.includes(category))&&(!filmFilter||f.id===filmFilter)&&(!query||[l.name,l.city,l.country,f.title,f.year,f.director,...f.cast,...f.collections].join(' ').toLowerCase().includes(query.toLowerCase())))}
 function filtered(){return LOCATIONS.filter(matchLocation)}
